@@ -1,19 +1,506 @@
-<!doctype html>
-<html>
-	<head>
-		<meta charset="utf-8" />
-		<meta name="viewport" content="width=device-width" />
-		<title>My static Space</title>
-		<link rel="stylesheet" href="style.css" />
-	</head>
-	<body>
-		<div class="card">
-			<h1>Welcome to your static Space!</h1>
-			<p>You can modify this app directly by editing <i>index.html</i> in the Files and versions tab.</p>
-			<p>
-				Also don't forget to check the
-				<a href="https://huggingface.co/docs/hub/spaces" target="_blank">Spaces documentation</a>.
-			</p>
-		</div>
-	</body>
+<!DOCTYPE html>
+<html lang="fa" dir="rtl">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>مسکن نور | خرید و فروش و اجاره ملک</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <style>
+        @import url('https://fonts.googleapis.com/css2?family=Noto+Naskh+Arabic:wght@400;500;600;700&display=swap');
+        
+        body {
+            font-family: 'Noto Naskh Arabic', serif;
+        }
+        
+        .search-box-shadow {
+            box-shadow: 0 4px 20px rgba(0, 0, 0, 0.1);
+        }
+        
+        .property-card:hover {
+            transform: translateY(-5px);
+            transition: all 0.3s ease;
+        }
+        
+        .gradient-bg {
+            background: linear-gradient(135deg, #4f46e5 0%, #7c3aed 100%);
+        }
+
+        @keyframes blob {
+            0% {
+                transform: translate(0px, 0px) scale(1);
+            }
+            33% {
+                transform: translate(30px, -50px) scale(1.1);
+            }
+            66% {
+                transform: translate(-20px, 20px) scale(0.9);
+            }
+            100% {
+                transform: translate(0px, 0px) scale(1);
+            }
+        }
+
+        .animate-blob {
+            animation: blob 7s infinite;
+        }
+
+        .animation-delay-2000 {
+            animation-delay: 2s;
+        }
+
+        .animation-delay-4000 {
+            animation-delay: 4s;
+        }
+
+        .animation-delay-6000 {
+            animation-delay: 6s;
+        }
+        
+        .property-badge {
+            position: absolute;
+            top: 1rem;
+            right: 1rem;
+            background-color: rgba(0, 0, 0, 0.6);
+            color: white;
+            padding: 0.25rem 0.5rem;
+            border-radius: 0.25rem;
+            font-size: 0.875rem;
+        }
+        
+        .heart-btn:hover .far {
+            color: #ef4444;
+        }
+    </style>
+</head>
+<body class="bg-gray-50">
+    <!-- Header -->
+    <header class="gradient-bg text-white sticky top-0 z-50">
+        <div class="container mx-auto px-4 py-4">
+            <div class="flex justify-between items-center">
+                <div class="flex items-center space-x-4 space-x-reverse">
+                    <div class="text-2xl font-bold">مسکن نور</div>
+                    <nav class="hidden md:flex space-x-6 space-x-reverse">
+                        <a href="#" class="hover:text-gray-200">خانه</a>
+                        <a href="#" class="hover:text-gray-200">خرید</a>
+                        <a href="#" class="hover:text-gray-200">اجاره</a>
+                        <a href="#" class="hover:text-gray-200">فروش</a>
+                        <a href="#" class="hover:text-gray-200">درباره ما</a>
+                    </nav>
+                </div>
+                <div class="flex items-center space-x-3 space-x-reverse">
+                    <button class="hidden md:block bg-white text-indigo-600 px-4 py-2 rounded-lg font-medium hover:bg-gray-100 transition-colors">ثبت آگهی</button>
+                    <button class="bg-white/20 p-2 rounded-full hover:bg-white/30 transition-colors">
+                        <i class="fas fa-user"></i>
+                    </button>
+                    <button class="md:hidden p-2">
+                        <i class="fas fa-bars"></i>
+                    </button>
+                </div>
+            </div>
+        </div>
+    </header>
+
+    <!-- Hero Section -->
+    <section class="gradient-bg text-white py-12 md:py-20">
+        <div class="container mx-auto px-4">
+            <div class="max-w-3xl mx-auto text-center">
+                <h1 class="text-3xl md:text-5xl font-bold mb-6">پلتفرم هوشمند خرید و فروش ملک</h1>
+                <p class="text-lg md:text-xl mb-8 opacity-90">با کاشانه، ملک مورد نظر خود را سریعتر و راحت‌تر پیدا کنید</p>
+                
+                <!-- Search Box -->
+                <div class="bg-white rounded-xl p-4 search-box-shadow">
+                    <div class="flex flex-col md:flex-row gap-4">
+                        <div class="flex-1">
+                            <select class="w-full p-3 border border-gray-300 rounded-lg text-gray-700 focus:outline-none focus:ring-2 focus:ring-indigo-500">
+                                <option selected>نوع ملک</option>
+                                <option>آپارتمان</option>
+                                <option>ویلا</option>
+                                <option>زمین</option>
+                                <option>تجاری</option>
+                            </select>
+                        </div>
+                        <div class="flex-1">
+                            <select class="w-full p-3 border border-gray-300 rounded-lg text-gray-700 focus:outline-none focus:ring-2 focus:ring-indigo-500">
+                                <option selected>شهر</option>
+                                <option>کابل</option>
+                                <option>دشت برچی</option>
+                                <option>کارته سخی</option>
+                                <option>کارته پروان</option>
+                                <option>کارته چهار</option>
+                                <option>دارالامان</option>
+                                <option>قره باغ</option>
+                                <option>چمن حضوری</option>
+                                <option>ده افغانان</option>
+                                <option>شهر نو</option>
+                                <option>پغمان</option>
+                                <option>میر داوود</option>
+                                <option>قلعه فتح الله</option>
+                            </select>
+                        </div>
+                        <div class="flex-1">
+                            <select class="w-full p-3 border border-gray-300 rounded-lg text-gray-700 focus:outline-none focus:ring-2 focus:ring-indigo-500">
+                                <option selected>نوع معامله</option>
+                                <option>خرید</option>
+                                <option>اجاره</option>
+                                <option>رهن کامل</option>
+                            </select>
+                        </div>
+                        <button class="bg-indigo-600 text-white px-6 py-3 rounded-lg hover:bg-indigo-700 transition-colors">
+                            <i class="fas fa-search ml-2"></i>
+                            جستجو
+                        </button>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Featured Properties -->
+    <section class="py-12 bg-white">
+        <div class="container mx-auto px-4">
+            <div class="flex justify-between items-center mb-8">
+                <h2 class="text-2xl font-bold text-gray-800">آگهی‌های ویژه</h2>
+                <a href="#" class="text-indigo-600 hover:text-indigo-800 flex items-center">
+                    مشاهده همه
+                    <i class="fas fa-arrow-left mr-2"></i>
+                </a>
+            </div>
+            
+            <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
+                <!-- Property Card 1 -->
+                <div class="property-card bg-white rounded-xl overflow-hidden shadow-md hover:shadow-lg transition-shadow duration-300">
+                    <div class="relative">
+                        <img src="https://images.unsplash.com/photo-1560448204-e02f11c3d0e2?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=1470&q=80"
+                             alt="آپارتمان نوساز در کابل" class="w-full h-48 object-cover">
+                        <div class="absolute top-3 left-3 bg-indigo-600 text-white px-3 py-1 rounded-full text-sm">
+                            ویژه
+                        </div>
+                        <div class="property-badge">
+                            <i class="fas fa-map-marker-alt ml-1"></i>
+                            کابل، کارته پروان
+                        </div>
+                    </div>
+                    <div class="p-4">
+                        <h3 class="text-lg font-bold text-gray-800 mb-2">آپارتمان 120 متری نوساز</h3>
+                        <div class="flex justify-between items-center mb-4">
+                            <div class="text-gray-600">
+                                <i class="fas fa-bed ml-1 text-indigo-600"></i>
+                                3 خوابه
+                            </div>
+                            <div class="text-gray-600">
+                                <i class="fas fa-bath ml-1 text-indigo-600"></i>
+                                2 حمام
+                            </div>
+                            <div class="text-gray-600">
+                                <i class="fas fa-car ml-1 text-indigo-600"></i>
+                                1 پارکینگ
+                            </div>
+                        </div>
+                        <div class="flex justify-between items-center">
+                            <div class="text-indigo-600 font-bold text-lg">25,000,000 افغانی</div>
+                            <button class="heart-btn text-gray-400 hover:text-red-500 transition-colors">
+                                <i class="far fa-heart text-xl"></i>
+                            </button>
+                        </div>
+                    </div>
+                </div>
+                
+                <!-- Property Card 2 -->
+                <div class="property-card bg-white rounded-xl overflow-hidden shadow-md hover:shadow-lg transition-shadow duration-300">
+                    <div class="relative">
+                        <img src="https://images.unsplash.com/photo-1600585154340-be6161a56a0c?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=1470&q=80"
+                             alt="ویلای مدرن در کابل" class="w-full h-48 object-cover">
+                        <div class="absolute top-3 left-3 bg-amber-500 text-white px-3 py-1 rounded-full text-sm">
+                            جدید
+                        </div>
+                        <div class="property-badge">
+                            <i class="fas fa-map-marker-alt ml-1"></i>
+                            کابل، قره باغ
+                        </div>
+                    </div>
+                    <div class="p-4">
+                        <h3 class="text-lg font-bold text-gray-800 mb-2">ویلای 250 متری دوبلکس</h3>
+                        <div class="flex justify-between items-center mb-4">
+                            <div class="text-gray-600">
+                                <i class="fas fa-bed ml-1 text-indigo-600"></i>
+                                4 خوابه
+                            </div>
+                            <div class="text-gray-600">
+                                <i class="fas fa-bath ml-1 text-indigo-600"></i>
+                                3 حمام
+                            </div>
+                            <div class="text-gray-600">
+                                <i class="fas fa-car ml-1 text-indigo-600"></i>
+                                2 پارکینگ
+                            </div>
+                        </div>
+                        <div class="flex justify-between items-center">
+                            <div class="text-indigo-600 font-bold text-lg">90,000,000 افغانی</div>
+                            <button class="heart-btn text-gray-400 hover:text-red-500 transition-colors">
+                                <i class="far fa-heart text-xl"></i>
+                            </button>
+                        </div>
+                    </div>
+                </div>
+                
+                <!-- Property Card 3 -->
+                <div class="property-card bg-white rounded-xl overflow-hidden shadow-md hover:shadow-lg transition-shadow duration-300">
+                    <div class="relative">
+                        <img src="https://images.unsplash.com/photo-1512917774080-9991f1c4c750?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=1470&q=80"
+                             alt="آپارتمان مدرن در کابل" class="w-full h-48 object-cover">
+                        <div class="property-badge">
+                            <i class="fas fa-map-marker-alt ml-1"></i>
+                            کابل، کارته سخی
+                        </div>
+                    </div>
+                    <div class="p-4">
+                        <h3 class="text-lg font-bold text-gray-800 mb-2">آپارتمان 85 متری کلاسیک</h3>
+                        <div class="flex justify-between items-center mb-4">
+                            <div class="text-gray-600">
+                                <i class="fas fa-bed ml-1 text-indigo-600"></i>
+                                2 خوابه
+                            </div>
+                            <div class="text-gray-600">
+                                <i class="fas fa-bath ml-1 text-indigo-600"></i>
+                                1 حمام
+                            </div>
+                            <div class="text-gray-600">
+                                <i class="fas fa-car ml-1 text-indigo-600"></i>
+                                1 پارکینگ
+                            </div>
+                        </div>
+                        <div class="flex justify-between items-center">
+                            <div class="text-indigo-600 font-bold text-lg">16,400,000 افغانی</div>
+                            <button class="heart-btn text-gray-400 hover:text-red-500 transition-colors">
+                                <i class="far fa-heart text-xl"></i>
+                            </button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Services -->
+    <section class="py-12 bg-gray-50">
+        <div class="container mx-auto px-4">
+            <h2 class="text-2xl font-bold text-center text-gray-800 mb-12">چرا کاشانه را انتخاب کنید؟</h2>
+            
+            <div class="grid grid-cols-1 md:grid-cols-3 gap-8">
+                <!-- Service 1 -->
+                <div class="bg-white p-6 rounded-xl shadow-sm hover:shadow-md transition-shadow text-center">
+                    <div class="bg-indigo-100 w-16 h-16 rounded-full flex items-center justify-center mx-auto mb-4">
+                        <i class="fas fa-home text-indigo-600 text-2xl"></i>
+                    </div>
+                    <h3 class="text-lg font-bold text-gray-800 mb-2">تنوع بالای املاک</h3>
+                    <p class="text-gray-600">با هزاران آگهی معتبر در سراسر کشور، ملک مورد نظر خود را در کاشانه پیدا کنید</p>
+                </div>
+                
+                <!-- Service 2 -->
+                <div class="bg-white p-6 rounded-xl shadow-sm hover:shadow-md transition-shadow text-center">
+                    <div class="bg-indigo-100 w-16 h-16 rounded-full flex items-center justify-center mx-auto mb-4">
+                        <i class="fas fa-shield-alt text-indigo-600 text-2xl"></i>
+                    </div>
+                    <h3 class="text-lg font-bold text-gray-800 mb-2">مشاوره تخصصی</h3>
+                    <p class="text-gray-600">مشاوران متخصص ما در تمام مراحل خرید، فروش یا اجاره همراه شما هستند</p>
+                </div>
+                
+                <!-- Service 3 -->
+                <div class="bg-white p-6 rounded-xl shadow-sm hover:shadow-md transition-shadow text-center">
+                    <div class="bg-indigo-100 w-16 h-16 rounded-full flex items-center justify-center mx-auto mb-4">
+                        <i class="fas fa-bolt text-indigo-600 text-2xl"></i>
+                    </div>
+                    <h3 class="text-lg font-bold text-gray-800 mb-2">پرداخت امن</h3>
+                    <p class="text-gray-600">سیستم پرداخت امن کاشانه، معاملات شما را با خیال راحت انجام می‌دهد</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Testimonials -->
+    <section class="py-12 bg-white">
+        <div class="container mx-auto px-4">
+            <h2 class="text-2xl font-bold text-center text-gray-800 mb-12">نظرات مشتریان ما</h2>
+            
+            <div class="grid grid-cols-1 md:grid-cols-2 gap-8">
+                <!-- Testimonial 1 -->
+                <div class="bg-gray-50 p-6 rounded-xl">
+                    <div class="flex items-center mb-4">
+                        <div class="w-12 h-12 rounded-full bg-indigo-100 flex items-center justify-center text-indigo-600 font-bold text-xl">م</div>
+                        <div class="mr-4">
+                            <h4 class="font-bold text-gray-800">محمد رضایی</h4>
+                            <div class="flex text-amber-400">
+                                <i class="fas fa-star"></i>
+                                <i class="fas fa-star"></i>
+                                <i class="fas fa-star"></i>
+                                <i class="fas fa-star"></i>
+                                <i class="fas fa-star"></i>
+                            </div>
+                        </div>
+                    </div>
+                    <p class="text-gray-600">با کمک مشاورین کاشانه توانستم در عرض یک ماه خانه مناسب خودم رو در بهترین نقطه تهران پیدا کنم. ممنون از تیم حرفه‌ای شما</p>
+                </div>
+                
+                <!-- Testimonial 2 -->
+                <div class="bg-gray-50 p-6 rounded-xl">
+                    <div class="flex items-center mb-4">
+                        <div class="w-12 h-12 rounded-full bg-indigo-100 flex items-center justify-center text-indigo-600 font-bold text-xl">ز</div>
+                        <div class="mr-4">
+                            <h4 class="font-bold text-gray-800">زهرا محمدی</h4>
+                            <div class="flex text-amber-400">
+                                <i class="fas fa-star"></i>
+                                <i class="fas fa-star"></i>
+                                <i class="fas fa-star"></i>
+                                <i class="fas fa-star"></i>
+                                <i class="fas fa-star-half-alt"></i>
+                            </div>
+                        </div>
+                    </div>
+                    <p class="text-gray-600">ملک ما در عرض دو هفته به قیمت مناسب فروخته شد. سیستم هوشمند قیمت‌گذاری کاشانه واقعا عالی عمل می‌کنه</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Call to Action -->
+    <section class="py-12 gradient-bg text-white">
+        <div class="container mx-auto px-4 text-center">
+            <h2 class="text-2xl md:text-3xl font-bold mb-6">آماده خرید یا فروش ملک هستید؟</h2>
+            <p class="text-lg mb-8 max-w-2xl mx-auto opacity-90">همین حالا ثبت نام کنید و از خدمات ویژه کاشانه بهره‌مند شوید</p>
+            <div class="flex flex-col md:flex-row justify-center gap-4">
+                <button class="bg-white text-indigo-600 px-8 py-3 rounded-lg font-bold hover:bg-gray-100 transition-colors">
+                    ثبت نام رایگان
+                </button>
+                <button class="border border-white text-white px-8 py-3 rounded-lg font-bold hover:bg-white/10 transition-colors">
+                    تماس با مشاور
+                </button>
+            </div>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer class="bg-gray-900 text-white py-12">
+        <div class="container mx-auto px-4">
+            <div class="grid grid-cols-1 md:grid-cols-4 gap-8">
+                <!-- About -->
+                <div>
+                    <h3 class="text-xl font-bold mb-4">کاشانه</h3>
+                    <p class="text-gray-400 mb-4">پلتفرم هوشمند خرید و فروش و اجاره ملک در سراسر افغانستان</p>
+                    <div class="flex space-x-4 space-x-reverse">
+                        <a href="#" class="text-gray-400 hover:text-white transition-colors">
+                            <i class="fab fa-instagram text-xl"></i>
+                        </a>
+                        <a href="#" class="text-gray-400 hover:text-white transition-colors">
+                            <i class="fab fa-telegram text-xl"></i>
+                        </a>
+                        <a href="#" class="text-gray-400 hover:text-white transition-colors">
+                            <i class="fab fa-linkedin text-xl"></i>
+                        </a>
+                    </div>
+                </div>
+                
+                <!-- Quick Links -->
+                <div>
+                    <h3 class="text-lg font-bold mb-4">لینک‌های سریع</h3>
+                    <ul class="space-y-2">
+                        <li><a href="#" class="text-gray-400 hover:text-white transition-colors">صفحه اصلی</a></li>
+                        <li><a href="#" class="text-gray-400 hover:text-white transition-colors">درباره ما</a></li>
+                        <li><a href="#" class="text-gray-400 hover:text-white transition-colors">تماس با ما</a></li>
+                        <li><a href="#" class="text-gray-400 hover:text-white transition-colors">قوانین و مقررات</a></li>
+                    </ul>
+                </div>
+                
+                <!-- Services -->
+                <div>
+                    <h3 class="text-lg font-bold mb-4">خدمات</h3>
+                    <ul class="space-y-2">
+                        <li><a href="#" class="text-gray-400 hover:text-white transition-colors">خرید ملک</a></li>
+                        <li><a href="#" class="text-gray-400 hover:text-white transition-colors">فروش ملک</a></li>
+                        <li><a href="#" class="text-gray-400 hover:text-white transition-colors">اجاره ملک</a></li>
+                        <li><a href="#" class="text-gray-400 hover:text-white transition-colors">مشاوره املاک</a></li>
+                    </ul>
+                </div>
+                
+                <!-- Contact -->
+                <div>
+                    <h3 class="text-lg font-bold mb-4">تماس با ما</h3>
+                    <ul class="space-y-2">
+                        <li class="flex items-center text-gray-400">
+                            <i class="fas fa-phone ml-2 text-indigo-500"></i>
+                            021-12345678
+                        </li>
+                        <li class="flex items-center text-gray-400">
+                            <i class="fas fa-envelope ml-2 text-indigo-500"></i>
+                            info@kashaneh.com
+                        </li>
+                        <li class="flex items-center text-gray-400">
+                            <i class="fas fa-map-marker-alt ml-2 text-indigo-500"></i>
+                            کابل، جاده میوند
+                        </li>
+                    </ul>
+                </div>
+            </div>
+            
+            <div class="border-t border-gray-800 mt-8 pt-8 text-center text-gray-500">
+                <p>© 2023 مسکن نور. تمام حقوق محفوظ است.</p>
+            </div>
+        </div>
+    </footer>
+
+    <!-- Mobile Menu (hidden by default) -->
+    <div class="fixed inset-0 bg-black/50 z-50 hidden" id="mobileMenu">
+        <div class="bg-white h-full w-4/5 max-w-sm mr-auto p-6">
+            <div class="flex justify-between items-center mb-8">
+                <div class="text-xl font-bold text-indigo-600">کاشانه</div>
+                <button id="closeMenu" class="text-gray-500">
+                    <i class="fas fa-times text-xl"></i>
+                </button>
+            </div>
+            
+            <nav class="space-y-4">
+                <a href="#" class="block py-2 text-gray-700 hover:text-indigo-600">خانه</a>
+                <a href="#" class="block py-2 text-gray-700 hover:text-indigo-600">خرید</a>
+                <a href="#" class="block py-2 text-gray-700 hover:text-indigo-600">اجاره</a>
+                <a href="#" class="block py-2 text-gray-700 hover:text-indigo-600">فروش</a>
+                <a href="#" class="block py-2 text-gray-700 hover:text-indigo-600">درباره ما</a>
+                <button class="w-full bg-indigo-600 text-white px-4 py-2 rounded-lg font-medium mt-4 hover:bg-indigo-700">
+                    ثبت آگهی
+                </button>
+            </nav>
+        </div>
+    </div>
+
+    <script>
+        // Mobile menu toggle
+        document.addEventListener('DOMContentLoaded', function() {
+            const menuButton = document.querySelector('.md\\:hidden.p-2');
+            const mobileMenu = document.getElementById('mobileMenu');
+            const closeButton = document.getElementById('closeMenu');
+            
+            menuButton.addEventListener('click', function() {
+                mobileMenu.classList.remove('hidden');
+            });
+            
+            closeButton.addEventListener('click', function() {
+                mobileMenu.classList.add('hidden');
+            });
+            
+            // Heart button functionality
+            const heartButtons = document.querySelectorAll('.heart-btn');
+            heartButtons.forEach(button => {
+                button.addEventListener('click', function() {
+                    const icon = this.querySelector('i');
+                    if (icon.classList.contains('far')) {
+                        icon.classList.remove('far');
+                        icon.classList.add('fas', 'text-red-500');
+                    } else {
+                        icon.classList.remove('fas', 'text-red-500');
+                        icon.classList.add('far');
+                    }
+                });
+            });
+        });
+    </script>
+<p style="border-radius: 8px; text-align: center; font-size: 12px; color: #fff; margin-top: 16px;position: fixed; left: 8px; bottom: 8px; z-index: 10; background: rgba(0, 0, 0, 0.8); padding: 4px 8px;">Made with <img src="https://enzostvs-deepsite.hf.space/logo.svg" alt="DeepSite Logo" style="width: 16px; height: 16px; vertical-align: middle;display:inline-block;margin-right:3px;filter:brightness(0) invert(1);"><a href="https://enzostvs-deepsite.hf.space" style="color: #fff;text-decoration: underline;" target="_blank" >DeepSite</a> - 🧬 <a href="https://enzostvs-deepsite.hf.space?remix=PoyaCab/noorrealstate" style="color: #fff;text-decoration: underline;" target="_blank" >Remix</a></p></body>
 </html>
